@@ -1,0 +1,36 @@
+{
+  "vpc_enterprise_project_id": "0",
+  "vpc_name": "vpc-test-module",
+  "vpc_cidr": "192.168.0.0/16",
+  "subnets_configuration": [
+    {
+      "name": "vpc-subnet-test-module",
+      "cidr": "192.168.0.0/24"
+    }
+  ],
+  "security_group_name": "security_group-test-module",
+
+  "ecs_instance_enterprise_project_id": "0",
+  "instance_flavor_cpu_core_count": 4,
+  "instance_flavor_memory_size": 8,
+  "instance_image_os_type": "CentOS",
+  "instance_image_architecture": "x86",
+  "instance_name": "ecs-test-module",
+  "instance_disks_configuration": [
+    {
+      "is_system_disk": true,
+      "type": "SSD",
+      "size": 200
+    }
+  ],
+
+  "ecs_system_image_name": "ecs-image-test-module",
+  "ecs_system_image_description": "description test",
+  "ecs_system_image_max_ram": 1024,
+  "ecs_system_image_min_ram": 1024,
+  "ecs_system_image_tags": {
+    "foo": "bar",
+    "key": "value"
+  },
+  "ecs_system_image_enterprise_project_id": "0"
+}
