@@ -1,0 +1,9 @@
+output "ecs_system_image_id" {
+  description = "The ID of the image"
+  value       = try(huaweicloud_ims_ecs_system_image.this[0].id, "")
+}
+
+output "ecs_system_image_status" {
+  description = "The status of the image"
+  value       = try(huaweicloud_ims_ecs_system_image.this[0].status, "")
+}
