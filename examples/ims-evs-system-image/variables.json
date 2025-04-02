@@ -1,0 +1,47 @@
+{
+  "vpc_enterprise_project_id": "0",
+  "vpc_name": "vpc-test-module",
+  "vpc_cidr": "192.168.0.0/16",
+  "subnets_configuration": [
+    {
+      "name": "vpc-subnet-test-module",
+      "cidr": "192.168.0.0/24"
+    }
+  ],
+  "security_group_name": "security_group-test-module",
+
+  "ecs_instance_enterprise_project_id": "0",
+  "instance_flavor_cpu_core_count": 4,
+  "instance_flavor_memory_size": 8,
+  "instance_image_os_type": "CentOS",
+  "instance_image_architecture": "x86",
+  "instance_name": "ecs-test-module",
+  "instance_disks_configuration": [
+    {
+      "is_system_disk": true,
+      "type": "SSD",
+      "size": 200
+    }
+  ],
+
+  "volume_type": "GPSSD2",
+  "volume_iops": 3000,
+  "volume_throughput": 125,
+  "volume_device_type": "VBD",
+  "volume_name": "test-volume-name",
+  "volume_description": "test description",
+  "volume_size": 20,
+  "volume_multiattach": false,
+
+  "evs_system_image_name": "evs-image-test-module",
+  "evs_system_image_os_version": "Ubuntu 19.04 server 64bit",
+  "evs_system_image_type": "ECS",
+  "evs_system_image_description": "description test",
+  "evs_system_image_max_ram": 1024,
+  "evs_system_image_min_ram": 1024,
+  "evs_system_image_tags": {
+    "foo": "bar",
+    "key": "value"
+  },
+  "evs_system_image_enterprise_project_id": "0"
+}

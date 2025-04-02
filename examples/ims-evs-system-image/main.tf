@@ -45,16 +45,40 @@ module "ecs_instance" {
   ] : []
 }
 
-module "ims_ecs_system_image" {
+module "evs_volume" {
+  source = "github.com/terraform-huaweicloud-modules/terraform-huaweicloud-evs/modules/evs-volume"
+
+  volume_availability_zone = try(data.huaweicloud_availability_zones.this.names[0], "")
+
+  volume_type        = var.volume_type
+  volume_iops        = var.volume_iops
+  volume_throughput  = var.volume_throughput
+  volume_device_type = var.volume_device_type
+  volume_name        = var.volume_name
+  volume_description = var.volume_description
+  volume_size        = var.volume_size
+  volume_multiattach = var.volume_multiattach
+}
+
+resource "huaweicloud_compute_volume_attach" "this" {
+  instance_id = module.ecs_instance.instance_id
+  volume_id   = module.evs_volume.volume_id
+}
+
+module "ims_evs_system_image" {
   source = "../../modules/ims-system-image"
 
-  is_evs_system_image_create = false
+  is_ecs_system_image_create = false
 
-  ecs_system_image_name                  = var.ecs_system_image_name
-  ecs_system_image_instance_id           = module.ecs_instance.instance_id
-  ecs_system_image_description           = var.ecs_system_image_description
-  ecs_system_image_max_ram               = var.ecs_system_image_max_ram
-  ecs_system_image_min_ram               = var.ecs_system_image_min_ram
-  ecs_system_image_tags                  = var.ecs_system_image_tags
-  ecs_system_image_enterprise_project_id = var.ecs_system_image_enterprise_project_id
+  evs_system_image_name                  = var.evs_system_image_name
+  evs_system_image_volume_id             = module.evs_volume.volume_id
+  evs_system_image_os_version            = var.evs_system_image_os_version
+  evs_system_image_type                  = var.evs_system_image_type
+  evs_system_image_description           = var.evs_system_image_description
+  evs_system_image_max_ram               = var.evs_system_image_max_ram
+  evs_system_image_min_ram               = var.evs_system_image_min_ram
+  evs_system_image_tags                  = var.evs_system_image_tags
+  evs_system_image_enterprise_project_id = var.evs_system_image_enterprise_project_id
+
+  depends_on = [huaweicloud_compute_volume_attach.this]
 }
